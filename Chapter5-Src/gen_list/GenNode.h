@@ -36,13 +36,8 @@ template <class ElemType>
 GenListNode<ElemType>::GenListNode(GenListNodeType tg, GenListNode<ElemType> *next)
 // ����������ɱ�־tg��ָ��next�����������
 {
-	tag = tg; // ��־
-	if (tag == HEAD)
-		// ͷ���: ����ѭ�������Ǳ�ʾΪtLinkָ���Լ�
-		tLink = (next != NULL) ? next : this;
-	else
-		// ��ͨ���: tLink ��ʽָ��
-		tLink = next; // ���
+	tag = tg;	  // ��־
+	tLink = next; // ���
 }
 
 #endif
