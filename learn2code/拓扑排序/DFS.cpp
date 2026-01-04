@@ -26,8 +26,8 @@ void dfs(int u)
             return;
         }
     }
-    vis[u] = 2;        // DFS结束后打标记完成
-    topo.push_back(u); // 后序
+    vis[u] = 2; // DFS结束后打标记完成
+    topo.push_back(u);
 }
 
 int main()
@@ -53,7 +53,7 @@ int main()
         return 0;
     }
 
-    reverse(topo.begin(), topo.end()); // 逆序
+    reverse(topo.begin(), topo.end()); // 逆序: 先进入的就是后进入的前驱
 
     cout << "DFS 拓扑序：";
     for (int x : topo)
