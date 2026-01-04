@@ -10,19 +10,24 @@ int main()
 {
     int n = 4;
     // 邻接表
+    // vector<vector<int>> graph = {
+    //     {1, 2}, // 0
+    //     {3},
+    //     {3},
+    //     {} // 3
+    // };
     vector<vector<int>> graph = {
-        {1, 2}, // 0
+        {1},
+        {2},
         {3},
-        {3},
-        {} // 3
-    };
+        {0}};
 
     vector<int> indeg(n, 0);
     for (int u = 0; u < n; u++)
     {
         for (int v : graph[u])
         {
-            indeg[v]++;
+            indeg[v]++; // 入度统计
         }
     }
 
@@ -30,7 +35,7 @@ int main()
     for (int i = 0; i < n; i++)
     {
         if (indeg[i] == 0)
-            q.push(i);
+            q.push(i); // BFS队列初始化：入度为 0 的点
     }
 
     vector<int> topo;
@@ -39,10 +44,11 @@ int main()
         int u = q.front();
         q.pop();
         topo.push_back(u);
+        // 出队进入拓扑序列
 
         for (int v : graph[u])
         {
-            if (--indeg[v] == 0)
+            if (--indeg[v] == 0) // 对应的相邻点入度-1
             {
                 q.push(v);
             }
