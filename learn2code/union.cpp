@@ -6,6 +6,22 @@ union U
     double d;
 };
 
+enum Type
+{
+    INT,
+    DOUBLE
+};
+
+struct Value
+{
+    Type type;
+    union
+    {
+        int i;
+        double d;
+    };
+};
+
 int main()
 {
     U u;
@@ -18,5 +34,15 @@ int main()
     // 此时 u.i 的值已经“被覆盖”
 
     printf("i: %d;d: %f\n", u.i, u.d);
+
+    Value v;
+    v.type = INT;
+    v.i = 10;
+
+    if (v.type == INT)
+    {
+        std::cout << v.i;
+    }
+
     return 0;
 }
