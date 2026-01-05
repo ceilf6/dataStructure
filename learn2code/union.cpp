@@ -1,5 +1,7 @@
 #include <iostream>
 
+// 现代替代品：std::variant
+
 union U
 {
     int i;
