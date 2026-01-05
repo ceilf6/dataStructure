@@ -13,3 +13,4 @@
 !Makefile
 !.gitignore
 !*.out
+!.vscode/
