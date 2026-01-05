@@ -2,7 +2,7 @@
 
 // int change(int a2, int b2)
 // {
-//     a2 = 10;
+//     a2 = 10; // 局部工作区
 //     b2 = 20;
 //     return a2;
 // }
