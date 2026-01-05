@@ -1,6 +1,6 @@
 #include "单链表.h"
 
-//
+// 1. 空链表
 template <class ElemType>
 LinkList<ElemType>::LinkList()
 {
@@ -8,7 +8,7 @@ LinkList<ElemType>::LinkList()
     assert(head);
     length = 0;
 }
-
+// 2. 数组转链表
 template <class ElemType>
 LinkList<ElemType>::LinkList(ElemType v[], int n)
 {
@@ -23,11 +23,11 @@ LinkList<ElemType>::LinkList(ElemType v[], int n)
     }
     length = n;
 }
-
+// 3. 析构函数
 template <class ElemType>
 LinkList<ElemType>::~LinkList()
 {
-    Clear();
+    Clear(); // 4. 遍历销毁节点
     delete head;
 }
 
@@ -44,6 +44,7 @@ void LinkList<ElemType>::Clear()
     length = 0;
 }
 
+// 5. 遍历并作用
 template <class ElemType>
 void LinkList<ElemType>::Traverse(void (*Visit)(const ElemType &)) const
 {
@@ -55,6 +56,7 @@ void LinkList<ElemType>::Traverse(void (*Visit)(const ElemType &)) const
     }
 }
 
+// 6. 定位第几个元素
 template <class ElemType>
 int LinkList<ElemType>::LocateElem(const ElemType &e) const
 {
@@ -68,6 +70,7 @@ int LinkList<ElemType>::LocateElem(const ElemType &e) const
     return (p != NULL) ? count : 0;
 }
 
+// 7. 取第几个元素值
 template <class ElemType>
 LinkList<ElemType>::Status LinkList<ElemType>::GetElem(int i, ElemType &e) const
 {
@@ -84,6 +87,7 @@ LinkList<ElemType>::Status LinkList<ElemType>::GetElem(int i, ElemType &e) const
     }
 }
 
+// 8. 设第几个元素值
 template <class ElemType>
 LinkList<ElemType>::Status LinkList<ElemType>::SetElem(int i, const ElemType &e)
 {
@@ -100,6 +104,7 @@ LinkList<ElemType>::Status LinkList<ElemType>::SetElem(int i, const ElemType &e)
     }
 }
 
+// 9. 删除第几个元素
 template <class ElemType>
 LinkList<ElemType>::Status LinkList<ElemType>::DeleteElem(int i, ElemType &e)
 {
@@ -115,11 +120,12 @@ LinkList<ElemType>::Status LinkList<ElemType>::DeleteElem(int i, ElemType &e)
         p->next = q->next;
         e = q->data;
         length--;
-        delete q;
+        delete q; // 对被跳过的、标记的指针删除
         return SUCCESS;
     }
 }
 
+// 10. 插入元素
 template <class ElemType>
 LinkList<ElemType>::Status LinkList<ElemType>::InsertElem(int i, const ElemType &e)
 {
@@ -139,6 +145,7 @@ LinkList<ElemType>::Status LinkList<ElemType>::InsertElem(int i, const ElemType 
     }
 }
 
+// 11. 在末尾插入
 template <class ElemType>
 LinkList<ElemType>::Status LinkList<ElemType>::InsertElem(const ElemType &e)
 {
