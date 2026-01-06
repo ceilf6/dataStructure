@@ -35,7 +35,8 @@ std::string mid2back(std::string str)
             ans += i;
         else if (priority(i) > 0)
         {
-            while (top >= 0 && priority(stack[top]) >= priority(i))
+            while (top >= 0 && priority(stack[top]) >= priority(i) && priority(stack[top]) != '(')
+            // 最好还是显式说明遇到 ( 终止，因为 ( 需要确保运算优先级，虽然 第二个判断就能短路判断出来，但是显式说明可以提高后续代码拓展性
             {
                 ans += stack[top];
             }
