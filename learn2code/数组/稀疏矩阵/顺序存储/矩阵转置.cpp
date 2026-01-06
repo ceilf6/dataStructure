@@ -1,6 +1,7 @@
 #include "三元组顺序表-数组压缩.h"
 
-// 矩阵转置
+// 矩阵转置：像普通二维数组直接 O(1) 随机访问干就完了
+// 但是三元组顺序表转置不能简单交换，会破坏行优先顺序，所以得预计算实现转置: 统计原矩阵中每一列的非零元个数
 template <class ElemType>
 void TriSparseMatrix<ElemType>::
     FastTranspose(const TriSparseMatrix<ElemType> &source, TriSparseMatrix<ElemType> &dest)
