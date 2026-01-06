@@ -6,11 +6,11 @@ ShareStack::ShareStack()
     top2 = MAXSIZE;
 }
 
-bool ShareStack::isEmpty(int stackNum) const
+bool ShareStack::isEmpty(ShareStack::stackNum sn) const
 {
-    if (stackNum == 1)
+    if (sn == ShareStack::stack1)
         return top1 == -1;
-    else if (stackNum == 2)
+    else if (sn == ShareStack::stack2)
         return top2 == MAXSIZE;
     return true;
 }
@@ -20,17 +20,17 @@ bool ShareStack::isFull() const
     return top1 + 1 == top2;
 }
 
-bool ShareStack::push(int stackNum, ElemType x)
+bool ShareStack::push(ShareStack::stackNum sn, ElemType x)
 {
     if (isFull())
         return false;
 
-    if (stackNum == 1)
+    if (sn == ShareStack::stack1)
     {
         data[++top1] = x;
         return true;
     }
-    else if (stackNum == 2)
+    else if (sn == ShareStack::stack2)
     {
         data[--top2] = x;
         return true;
@@ -38,18 +38,18 @@ bool ShareStack::push(int stackNum, ElemType x)
     return false;
 }
 
-bool ShareStack::pop(int stackNum, ElemType &x)
+bool ShareStack::pop(ShareStack::stackNum sn, ElemType &x)
 {
-    if (stackNum == 1)
+    if (sn == ShareStack::stack1)
     {
-        if (isEmpty(1))
+        if (isEmpty(ShareStack::stack1))
             return false;
         x = data[top1--];
         return true;
     }
-    else if (stackNum == 2)
+    else if (sn == ShareStack::stack2)
     {
-        if (isEmpty(2))
+        if (isEmpty(ShareStack::stack2))
             return false;
         x = data[top2++];
         return true;
