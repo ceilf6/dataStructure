@@ -58,7 +58,7 @@ int DblLinkList<ElemType>::LocateElem(const ElemType &e)
 {
     DblNode<ElemType> *p = head->next;
     int count = 1;
-    while (p != head && p->data != e)
+    while (p != head && p->data != e) // 双向中用 !=head 防止环
     {
         count++;
         p = p->next;
@@ -69,7 +69,7 @@ int DblLinkList<ElemType>::LocateElem(const ElemType &e)
         return 0;
 }
 
-// 判断函数
+// 取指定的第 i 个元素
 template <class ElemType>
 DblLinkList<ElemType>::Status DblLinkList<ElemType>::GetElem(int i, ElemType &e) const
 {
@@ -86,7 +86,7 @@ DblLinkList<ElemType>::Status DblLinkList<ElemType>::GetElem(int i, ElemType &e)
     }
 }
 
-// 设置元素
+// 修改元素
 template <class ElemType>
 DblLinkList<ElemType>::Status DblLinkList<ElemType>::SetElem(int i, const ElemType &e)
 {
