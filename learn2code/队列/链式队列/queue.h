@@ -5,7 +5,7 @@ class LinkQueue
 {
 protected:
     Node<ElemType> *front, *rear;
-    // 注意链式队的头是虚拟头，第一个元素是 front->next
+    // 注意当前链式队的头是虚拟头，第一个元素是 front->next
 public:
     LinkQueue();
     virtual ~LinkQueue();
