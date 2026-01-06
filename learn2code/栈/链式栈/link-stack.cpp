@@ -1,12 +1,14 @@
 #include "link-stack.h"
 #include "Status.h"
 
+// 构造
 template <class ElemType>
 LinkStack<ElemType>::LinkStack()
 {
     top = NULL;
 }
 
+// 析构：处理管理的节点
 template <class ElemType>
 LinkStack<ElemType>::~LinkStack()
 {
@@ -15,7 +17,7 @@ LinkStack<ElemType>::~LinkStack()
 
 template <class ElemType>
 int LinkStack<ElemType>::GetLength() const
-// 操作结果：返回栈中元素个数
+// 遍历，返回栈中元素个数
 {
     int count = 0; // 计数器
     Node<ElemType> *p;
@@ -24,12 +26,14 @@ int LinkStack<ElemType>::GetLength() const
     return count;
 }
 
+// 链式栈判断是否为空只需要判断栈顶指针是否为空
 template <class ElemType>
 bool LinkStack<ElemType>::IsEmpty() const
 {
     return top == NULL;
 }
 
+// 遍历清除
 template <class ElemType>
 void LinkStack<ElemType>::Clear()
 // 操作结果：清空栈
@@ -56,6 +60,7 @@ Status LinkStack<ElemType>::Push(const ElemType item)
     }
 }
 
+// 返回栈顶元素前先判断是否栈空防止虚空索引
 template <class ElemType>
 Status LinkStack<ElemType>::Top(ElemType &e) const
 {
@@ -68,6 +73,7 @@ Status LinkStack<ElemType>::Top(ElemType &e) const
     }
 }
 
+// 链式：弹栈后记得删除结点
 template <class ElemType>
 Status LinkStack<ElemType>::Pop(ElemType &e)
 {
