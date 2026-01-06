@@ -34,6 +34,7 @@ void SolidLink::free_node(int i)
     list[i].next = list[1].next;
     list[1].next = i;
 }
+
 // 插入节点
 void SolidLink::insert(int x, int k)
 {
