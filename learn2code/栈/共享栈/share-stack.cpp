@@ -17,7 +17,7 @@ bool ShareStack::isEmpty(ShareStack::stackNum sn) const
 
 bool ShareStack::isFull() const
 {
-    return top1 + 1 == top2;
+    return top1 + 1 == top2; // 判断共享栈是否满就看两个指针是否相邻: top1 + 1 == top2
 }
 
 bool ShareStack::push(ShareStack::stackNum sn, ElemType x)
@@ -32,7 +32,7 @@ bool ShareStack::push(ShareStack::stackNum sn, ElemType x)
     }
     else if (sn == ShareStack::stack2)
     {
-        data[--top2] = x;
+        data[--top2] = x; // 双向奔赴
         return true;
     }
     return false;
