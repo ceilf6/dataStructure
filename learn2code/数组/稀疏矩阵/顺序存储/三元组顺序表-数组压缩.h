@@ -6,6 +6,15 @@
                        2    3    5
   用数组存储所有 Triple，按行优先排序。
   牺牲了数组 O(1) 的随机访问能力换取降低空间复杂度
+  - "稀疏矩阵压缩后必回失去随机存取能力"
+    - 普通数组：地址 = base + i*cols + j 这是 O(1) 的
+      一般矩阵在压缩后位置不再由行列决定，需要去查找
+    - 但是哈希表的存储是用 (row, col) 作为 key
+        unordered_map<pair<int,int>, ElemType> sparse;
+
+        // 访问 A[i][j]
+        sparse[{i, j}]  // 平均 O(1)
+      所以错误
 */
 
 template <class ElemType>
