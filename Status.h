@@ -1,6 +1,7 @@
 enum Status
 {
     SUCCESS,
-    FAILED
+    FAILED,
+    RANGE_ERROR
     // ...
 };

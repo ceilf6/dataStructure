@@ -17,3 +17,19 @@ public:
     const char *CStr() const;              // 将串转换成字符数组
     char &String::operator[](int p) const; // 重载下标运算符
 };
+
+// 类中自带 this 所以要么去掉 s1 要么在全局声明
+String operator+(const String &s1, const String &s2);
+// 重载连接运算符+
+bool operator==(const String &s1, const String &s2);
+// 重载关系运算符==
+bool operator<(const String &s1, const String &s2);
+// 重载关系运算符<
+bool operator>(const String &s1, const String &s2);
+// 重载关系运算符>
+bool operator<=(const String &s1, const String &s2);
+// 重载关系运算符<=
+bool operator>=(const String &s1, const String &s2);
+// 重载关系运算符>=
+bool operator!=(const String &s1, const String &s2);
+// 重载关系运算符!=
