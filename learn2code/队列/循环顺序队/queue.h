@@ -18,3 +18,15 @@ public:
     Status EnQueue(const ElemType e);
     void Traverse(void (*visit)(const ElemType &)) const;
 };
+
+/*
+另一种管理方式：本质其实就是 length = (rear-length+maxSize)%maxSize
+
+template<class ElemType>
+class SeqQueue {
+protected:
+    int front, length; // 队头指针，队列长度
+    int maxSize; // 队列容量
+    ElemType *elems; // 元素存储空间
+
+*/
