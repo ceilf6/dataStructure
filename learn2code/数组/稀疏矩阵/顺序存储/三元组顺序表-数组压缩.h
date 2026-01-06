@@ -17,6 +17,7 @@
       所以错误
 */
 
+#include "triple.h"
 template <class ElemType>
 class TriSparseMatrix
 {
