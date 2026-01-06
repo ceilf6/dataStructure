@@ -70,3 +70,45 @@ char &String::operator[](int p) const
 {
     return sVal[p];
 }
+
+String operator+(const String &s1, const String &s2)
+{
+    const char *cs1 = s1.CStr(); // 取第一个串值
+    const char *cs2 = s2.CStr(); // 取第二个串值
+    char *cs = new char[strlen(cs1) + strlen(cs2) + 1];
+    strcpy(cs, cs1); // 复制第一个串
+    strcat(cs, cs2); // 连接第二个串
+    String s(cs);    // 定义串对象并初始化
+    delete[] cs;     // 释放临时空间
+    return s;
+}
+
+bool operator==(const String &s1, const String &s2)
+{
+    return strcmp(s1.CStr(), s2.CStr()) == 0;
+}
+
+bool operator<(const String &s1, const String &s2)
+{
+    return strcmp(s1.CStr(), s2.CStr()) < 0;
+}
+
+bool operator>(const String &s1, const String &s2)
+{
+    return strcmp(s1.CStr(), s2.CStr()) > 0;
+}
+
+bool operator<=(const String &s1, const String &s2)
+{
+    return strcmp(s1.CStr(), s2.CStr()) <= 0;
+}
+
+bool operator>=(const String &s1, const String &s2)
+{
+    return strcmp(s1.CStr(), s2.CStr()) >= 0;
+}
+
+bool operator!=(const String &s1, const String &s2)
+{
+    return strcmp(s1.CStr(), s2.CStr()) != 0;
+}
