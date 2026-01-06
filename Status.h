@@ -1,0 +1,6 @@
+enum Status
+{
+    SUCCESS,
+    FAILED
+    // ...
+};
