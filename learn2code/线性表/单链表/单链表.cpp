@@ -193,3 +193,25 @@ void LinkList<ElemType>::reverse(Node<ElemType> *head) const
     return last;
     // last 不会变，永远是原链表反转区间的尾，也就是新链表的头
 }
+
+// 非递归实现链表反转
+/*
+逐个把 next 指针反向
+*/
+template <class ElemType>
+Node<ElemType> *ReverseIter(Node<ElemType> *head)
+{
+    Node<ElemType> *prev = nullptr;
+    Node<ElemType> *cur = head;
+    Node<ElemType> *next = nullptr;
+
+    while (cur != nullptr)
+    {
+        next = cur->next; // ① 先保存后继
+        cur->next = prev; // ② 翻转指针
+        prev = cur;       // ③ prev 前进
+        cur = next;       // ④ cur 前进
+    }
+
+    return prev; // 新头结点
+}
