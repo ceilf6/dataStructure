@@ -14,3 +14,5 @@
 !.gitignore
 !*.out
 !.vscode/
+
+!*.js
