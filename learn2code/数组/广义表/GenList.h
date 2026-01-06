@@ -4,6 +4,11 @@ enum GenListNodeType
     ATOM,
     LIST
 };
+/*
+  - HEAD：每个 () 的入口标记
+  - ATOM：() 内的原子值
+  - LIST：() 内嵌套的另一个 ()，通过 hLink 指向那个子表的 HEAD
+*/
 template <class ElemType>
 struct GenListNode
 {
@@ -18,7 +23,7 @@ struct GenListNode
     };
     GenListNode(GenListNodeType tg = HEAD,
                 GenListNode<ElemType> *next = NULL);
-    // 由标志tg和指针next构造引用数法广义表结点
+    // 由标志tag和指针next构造引用数法广义表结点
 };
 
 template <class ElemType>
