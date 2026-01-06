@@ -52,4 +52,5 @@ public:
     Status InsertElem(const ElemType &e);
     LinkList(const LinkList<ElemType> &la);
     LinkList<ElemType> &operator=(const LinkList<ElemType> &la);
+    void reverse(Node<ElemType> *p) const;
 };

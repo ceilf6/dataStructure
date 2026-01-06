@@ -134,6 +134,11 @@ LinkList<ElemType>::Status LinkList<ElemType>::InsertElem(int i, const ElemType 
     else
     {
         Node<ElemType> *p = head, *q;
+        // 让指针 p 指向和 head 指向的同一个节点
+        /* 相当于
+        Node<ElemType>* p = head;
+        Node<ElemType>* q;   // 只是声明，还没指向任何地方
+        */
         int count;
         for (count = 1; count < i; count++)
             p = p->next;
@@ -157,4 +162,34 @@ LinkList<ElemType>::Status LinkList<ElemType>::InsertElem(const ElemType &e)
     p->next = q;
     length++;
     return SUCCESS;
+}
+
+// 通过递归实现链表反转
+/*
+也就是这三步反复发生：
+    1.	递归反转 p->next 之后的链表
+    2.	让 p->next->next = p
+    3.	断开 p->next
+*/
+template <class ElemType>
+void LinkList<ElemType>::reverse(Node<ElemType> *head) const
+{
+    // 边界：空结点或最后一个结点
+    if (head == nullptr || head->next == nullptr)
+        return head;
+
+    Node<ElemType> *last = reverse(head->next);
+
+    // 反转
+    head->next->next = head;
+    head->next = nullptr; // succesor
+    // 必须每次都接到 nullptr 上，否则会形成环
+    /*
+    1 → 2 → 1 → 2 → ...
+        ↑     ↓
+        └─────┘
+    */
+
+    return last;
+    // last 不会变，永远是原链表反转区间的尾，也就是新链表的头
 }
