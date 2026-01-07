@@ -50,4 +50,5 @@ public:
     BinaryTree(const BinaryTree<ElemType> &t);
     BinaryTree(BinTreeNode<ElemType> *r);
     BinaryTree<ElemType> &operator=(const BinaryTree<ElemType> &t);
+    BinTreeNode<ElemType> *LeftSibling(const BinTreeNode<ElemType> *p) const;
 };
