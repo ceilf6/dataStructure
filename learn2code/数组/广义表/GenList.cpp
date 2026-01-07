@@ -55,3 +55,50 @@ void GenList<ElemType>::CopyHelp(const GenListNode<ElemType> *sourceHead,
             destPtr->atom = p->atom;
     }
 }
+
+// 比较两个广义表是否相等（结构和内容完全相同）
+// 返回：1 相等，0 不相等
+template <class ElemType>
+int CmpHelp(const GenListNode<ElemType> *hd1, const GenListNode<ElemType> *hd2)
+{
+    // 两个都是空表
+    if (hd1->tLink == NULL && hd2->tLink == NULL)
+        return 1;
+
+    // 一个空一个非空
+    if (hd1->tLink == NULL || hd2->tLink == NULL)
+        return 0;
+
+    // 双指针同步遍历两个表的元素
+    GenListNode<ElemType> *p1 = hd1->tLink;
+    GenListNode<ElemType> *p2 = hd2->tLink;
+
+    while (p1 != NULL && p2 != NULL)
+    {
+        // tag 类型不同
+        if (p1->tag != p2->tag)
+            return 0;
+
+        if (p1->tag == ATOM)
+        {
+            // 原子节点：比较值
+            if (p1->atom != p2->atom)
+                return 0;
+        }
+        else // p1->tag == LIST
+        {
+            // 表节点：递归比较子表
+            if (!CmpHelp(p1->hLink, p2->hLink))
+                return 0;
+        }
+
+        p1 = p1->tLink;
+        p2 = p2->tLink;
+    }
+
+    // 长度不同（一个遍历完了，另一个还有）
+    if (p1 != NULL || p2 != NULL)
+        return 0;
+
+    return 1;
+}

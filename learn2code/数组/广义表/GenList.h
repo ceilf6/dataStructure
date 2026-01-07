@@ -14,13 +14,14 @@ struct GenListNode
 {
     GenListNodeType tag;
     // 标志域,HEAD(0):头结点, ATOM(1):原子结构, LIST(2):表结点
-    GenListNode<ElemType> *tLink;
     union
     {
-        int ref;       // tag=HEAD,头结点,存放引用数
-        ElemType atom; // tag=ATOM,存放原子结点的数据域
-        GenListNode<ElemType> *hLink;
+        int ref;                      // tag=HEAD时,头结点,存放引用数
+        ElemType atom;                // tag=ATOM时,存放原子结点的数据域
+        GenListNode<ElemType> *hLink; // tag=LIST时，通过hLink指向子表的HEAD
     };
+    GenListNode<ElemType> *tLink; // tail/next
+
     GenListNode(GenListNodeType tg = HEAD,
                 GenListNode<ElemType> *next = NULL);
     // 由标志tag和指针next构造引用数法广义表结点
@@ -37,6 +38,7 @@ protected:
     void CopyHelp(const GenListNode<ElemType> *sourceHead,
                   GenListNode<ElemType> *&destHead);
     static void CreateHelp(GenListNode<ElemType> *&first);
+    int CmpHelp(const GenListNode<ElemType> *g1, const GenList<ElemType> *g2);
 
 public:
     GenList();
