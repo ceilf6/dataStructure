@@ -82,3 +82,56 @@ void BinaryTree<ElemType>::
         return;
     }
 }
+
+// 递归的节点个数
+template <class ElemType>
+int BinaryTree<ElemType>::NodeCount(
+    const BinTreeNode<ElemType> *r) const
+{
+    if (r == NULL)
+        return 0;
+    else
+        return NodeCount(r->leftChild) + NodeCount(r->rightChild) + 1;
+}
+
+// 递归拿高：左右子树最大值+1
+template <class ElemType>
+int BinaryTree<ElemType>::Height(
+    const BinTreeNode<ElemType> *r) const
+{
+    if (r == NULL) // 空二叉树高为0
+        return 0;
+    else
+    {
+        int lHeight, rHeight;
+        lHeight = Height(r->leftChild);  // 左子树的高
+        rHeight = Height(r->rightChild); // 右子树的高
+        return (lHeight > rHeight ? lHeight : rHeight) + 1;
+    }
+}
+
+/*
+# 前序+中序
+- 前序确定根节点 preLeft
+- 中序确定左右子树范围
+*/
+/**
+ * 左右指针是顺序二叉树数组的绝对定位
+ */
+template <class ElemType>
+void CreateBinaryTree(BinTreeNode<ElemType> *&r, ElemType pre[],
+                      ElemType in[], int preLeft, int preRight, int inLeft, int inRight)
+{
+    if (inLeft > inRight)
+        r = NULL;
+    else
+    {                                                // 二叉树有结点,非空二叉树
+        r = new BinTreeNode<ElemType>(pre[preLeft]); // 生成根结点
+        int mid = inLeft;
+        while (in[mid] != pre[preLeft]) // 找中序中的根节点位置
+            mid++;
+        CreateBinaryTree(r->leftChild, pre, in, preLeft + 1, preLeft + mid - inLeft, inLeft, mid - 1);
+        CreateBinaryTree(r->rightChild, pre, in, preLeft + mid - inLeft + 1, preRight, mid + 1,
+                         inRight);
+    }
+}
