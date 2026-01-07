@@ -11,7 +11,7 @@ int GenList<ElemType>::DepthHelp(const GenListNode<ElemType> *hd)
     {
         if (p->tag == LIST) // LIST -> 子表
         {
-            int curSubDepth = DepthHelp(p->hLink); // 子表深度
+            int curSubDepth = DepthHelp(p->hLink); // 递归拿到子表深度
             if (subMaxDepth < curSubDepth)
                 subMaxDepth = curSubDepth;
         }
@@ -32,8 +32,26 @@ void GenList<ElemType>::ClearHelp(GenListNode<ElemType> *hd)
             delete pre;
             pre = p;
             if (p->tag == LIST)
-                ClearHelp(p->hLink); // 释放子表
+                ClearHelp(p->hLink); // 递归释放子表
         }
         delete pre;
+    }
+}
+
+template <class ElemType>
+void GenList<ElemType>::CopyHelp(const GenListNode<ElemType> *sourceHead,
+                                 GenListNode<ElemType> *&destHead)
+{
+    destHead = new GenListNode<ElemType>(HEAD);
+    GenListNode<ElemType> *destPtr = destHead;
+    destHead->ref = 1;
+    for (GenListNode<ElemType> *p = sourceHead->tLink; p != NULL;
+         p = p->tLink)
+    {
+        destPtr = destPtr->tLink = new GenListNode<ElemType>(p->tag);
+        if (p->tag == LIST)
+            CopyHelp(p->hLink, destPtr->hLink); // 递归复制子表
+        else
+            destPtr->atom = p->atom;
     }
 }
