@@ -23,6 +23,7 @@ int UFSets<ElemType>::GetOrder(ElemType e) const
     return p;
 }
 
+// 查：查找元素所在集合的根（没路径压缩
 template <class ElemType>
 int UFSets<ElemType>::Find(ElemType e) const
 {
@@ -36,6 +37,7 @@ int UFSets<ElemType>::Find(ElemType e) const
     return p;
 }
 
+// 并：让一个根指向另一个根（没有按秩合并
 template <class ElemType>
 void UFSets<ElemType>::Union(ElemType a, ElemType b)
 {
@@ -46,4 +48,11 @@ void UFSets<ElemType>::Union(ElemType a, ElemType b)
         sets[r1].parent += sets[r2].parent;
         sets[r2].parent = r1;
     }
+}
+
+// Differ 判断是否属于不同集合：直接判断根是否相同
+template <class ElemType>
+bool UFSets<ElemType>::Differ(ElemType a, ElemType b)
+{
+    return Find(a) != Find(b);
 }
