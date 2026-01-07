@@ -13,7 +13,7 @@ class UFSets
 protected:
     ElemNode<ElemType> *sets;
     int size;
-    int Find(ElemType e) const;
+    int Find(ElemType e);
 
 public:
     UFSets(ElemType es[], int n);
