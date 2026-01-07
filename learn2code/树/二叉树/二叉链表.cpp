@@ -135,3 +135,17 @@ void CreateBinaryTree(BinTreeNode<ElemType> *&r, ElemType pre[],
                          inRight);
     }
 }
+
+template <class ElemType>
+void DisplayBTWithTreeShape(BinTreeNode<ElemType> *r, int level)
+{
+    if (r != NULL)
+    { // 空树不显示，只显示非空树
+        DisplayBTWithTreeShape<ElemType>(r->rightChild, level + 1);
+        cout << endl;
+        for (int i = 0; i < level - 1; i++) // 深度不同打印的左右节点中间的空格数量也需要变化
+            cout << " ";
+        cout << r->data; // 显示结点
+        DisplayBTWithTreeShape<ElemType>(r->leftChild, level + 1);
+    }
+}
