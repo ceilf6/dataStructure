@@ -1,3 +1,9 @@
+// 本文件只是生成堆的下沉算法
+// ，但是这版算法复杂度比learn2code/树/二叉树/堆/最小堆.cpp的向下调整算法高一些
+// （但其实都是 O(n) ）
+// 因为交换次数更多了，最好是通过 temp 优化
+// 更详细的请看 learn2code/树/二叉树/堆
+
 #include <stdio.h>
 
 void siftDown(int a[], int n, int i)
