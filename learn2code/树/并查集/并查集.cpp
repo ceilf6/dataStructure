@@ -49,6 +49,85 @@ void UFSets<ElemType>::Union(ElemType a, ElemType b)
         sets[r2].parent = r1;
     }
 }
+// 加权规则
+// 1. 按规模合并
+template <class ElemType>
+void UFSets<ElemType>::Union(ElemType a, ElemType b)
+{
+    int ra = Find(a);
+    int rb = Find(b);
+
+    if (ra == -1 || rb == -1 || ra == rb)
+        return;
+
+    // ra、rb 都是根，parent 为负数，绝对值表示规模
+    if (sets[ra].parent < sets[rb].parent)
+    {
+        // ra 的规模更大
+        sets[ra].parent += sets[rb].parent;
+        sets[rb].parent = ra;
+    }
+    else
+    {
+        sets[rb].parent += sets[ra].parent;
+        sets[ra].parent = rb;
+    }
+}
+// 2. 按高度合并
+template <class ElemType>
+void UFSets<ElemType>::Union(ElemType a, ElemType b)
+{
+    int ra = Find(a);
+    int rb = Find(b);
+
+    if (ra == -1 || rb == -1 || ra == rb)
+        return;
+
+    // 高度比较（parent 的绝对值）
+    if (sets[ra].parent < sets[rb].parent)
+    {
+        // ra 更高
+        sets[rb].parent = ra;
+    }
+    else if (sets[ra].parent > sets[rb].parent)
+    {
+        // rb 更高
+        sets[ra].parent = rb;
+    }
+    else
+    {
+        // 高度相同，合并后高度 +1
+        sets[rb].parent = ra;
+        sets[ra].parent--;
+    }
+}
+// 3. 按秩合并
+template <class ElemType>
+void UFSets<ElemType>::Union(ElemType a, ElemType b)
+{
+    int ra = Find(a);
+    int rb = Find(b);
+
+    if (ra == -1 || rb == -1 || ra == rb)
+        return;
+
+    // rank 存在 parent 的绝对值中
+    if (sets[ra].parent < sets[rb].parent)
+    {
+        // ra 的 rank 更大
+        sets[rb].parent = ra;
+    }
+    else if (sets[ra].parent > sets[rb].parent)
+    {
+        sets[ra].parent = rb;
+    }
+    else
+    {
+        // rank 相等
+        sets[rb].parent = ra;
+        sets[ra].parent--; // rank +1
+    }
+}
 
 // Differ 判断是否属于不同集合：直接判断根是否相同
 template <class ElemType>
