@@ -96,3 +96,59 @@ void InThreadBinTree<ElemType>::InOrder(void (*Visit)(const ElemType &)) const
             cout << "NULL" << endl;
     }
 }
+
+template <class ElemType>
+void InThreadBinTree<ElemType>::
+    InsertRightChild(ThreadBinTreeNode<ElemType> *p, const ElemType &e)
+{
+    ThreadBinTreeNode<ElemType> *x, *q;
+    if (p == NULL)
+        return;
+    else
+    {
+        /*
+        插在 p 的右边中序前驱一定是 p
+        新节点的右边就是直接继承 p 的右边
+        1. 这样就实现了新节点左右两边的连贯
+        */
+        x = new ThreadBinTreeNode<ElemType>(e, p,
+                                            p->rightChild, 1, p->rightTag); // 生成元素值为e结点x
+        if (p->rightTag == 0)
+        /*
+        2. 实现新节点右边到新节点的连贯
+        右子树的最左节点的前驱必须改为新节点
+        */
+        {
+            q = p->rightChild;
+            while (q->leftTag == 0)
+                q = q->leftChild;
+            q->leftChild = x;
+        }
+        /*
+        3. 最后实现新节点左边也就是插入目标元素 p 到新节点的连贯
+        */
+        p->rightChild = x;
+        p->rightTag = 0;
+        return;
+    }
+}
+
+template <class ElemType>
+void InThreadBinTree<ElemType>::
+    DeleteLeftChild(ThreadBinTreeNode<ElemType> *p)
+{
+    ThreadBinTreeNode<ElemType> *x, *q;
+    if (p == NULL || p->leftTag != 0)
+        return;
+    else
+    {
+        q = p->leftChild;
+        while (q->leftTag == 0) // 删除当前节点的右子树
+            q = q->leftChild;
+        q = q->leftChild;
+        DestroyHelp(p->leftChild); // 复用：删除当前节点的左子树
+        p->leftChild = q;
+        p->leftTag = 1;
+        return;
+    }
+}
