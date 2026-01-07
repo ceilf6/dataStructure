@@ -149,3 +149,10 @@ void DisplayBTWithTreeShape(BinTreeNode<ElemType> *r, int level)
         DisplayBTWithTreeShape<ElemType>(r->leftChild, level + 1);
     }
 }
+// 重载
+template <class ElemType>
+void DisplayBTWithTreeShape(BinaryTree<ElemType> &bt)
+{
+    DisplayBTWithTreeShape<ElemType>(bt.GetRoot(), 1);
+    cout << endl;
+}
