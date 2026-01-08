@@ -106,3 +106,16 @@ int AdjListDirNetwork<ElemType, WeightType>::
     else
         return p->nextarc->adjVex;
 }
+
+// 插入顶点：vexTable ，然后将新顶点指向的边节点信息初始化空
+template <class ElemType, class WeightType>
+void AdjListDirNetwork<ElemType, WeightType>::
+    InsertVex(const ElemType &e)
+{
+    if (vexNum == vexMaxNum)
+        throw Error("图的顶点数不能超过允许的最大数!");
+    vexTable[vexNum].data = e;
+    vexTable[vexNum].firstarc = NULL;
+    tag[vexNum] = UNVISITED;
+    vexNum++;
+}
