@@ -119,3 +119,23 @@ void AdjListDirNetwork<ElemType, WeightType>::
     tag[vexNum] = UNVISITED;
     vexNum++;
 }
+
+// 加入弧：从 v1 -> v2 的，那么只需要在 v1 后面添加新边节点信息，然后将原先的边节点信息接到新增节点后面
+template <class ElemType, class WeightType>
+void AdjListDirNetwork<ElemType, WeightType>::
+    InsertArc(int v1, int v2, WeightType w)
+{
+    if (v1 < 0 || v1 >= vexNum)
+        throw Error("v1不合法!");
+    if (v2 < 0 || v2 >= vexNum)
+        throw Error("v2不合法!");
+    if (v1 == v2)
+        throw Error("v1不能等于v2!");
+    if (w == infinity)
+        throw Error("w不能为无穷大!");
+    AdjListNetworkArc<WeightType> *p, *q;
+    p = vexTable[v1].firstarc;
+    vexTable[v1].firstarc =
+        new AdjListNetworkArc<WeightType>(v2, w, p);
+    arcNum++;
+}
