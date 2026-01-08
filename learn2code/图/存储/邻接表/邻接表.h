@@ -25,7 +25,7 @@ struct AdjListNetworkArc
 {
     int adjvex;                             // 顶点数组中的下标，标识这条边是连向哪个顶点
     WeightType weight;                      // 边权值
-    AdjListNetworkArc<WeightType> *nextarc; // 指向同一顶点的下一条边
+    AdjListNetworkArc<WeightType> *nextarc; // 指向同一顶点邻接表中的的下一条边节点，即又一个 AdjListNetworkArc
 
     AdjListNetworkArc(int v,
                       WeightType w,

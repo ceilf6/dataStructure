@@ -85,3 +85,24 @@ int AdjListDirNetwork<ElemType, WeightType>::FirstAdjVex(int v) const
     else
         return vexTable[v].firstarc->adjVex;
 }
+
+// 下一个邻接点序号：利用 nextarc 的指向 adjVex
+template <class ElemType, class WeightType>
+int AdjListDirNetwork<ElemType, WeightType>::
+    NextAdjVex(int v1, int v2) const
+{
+    AdjListNetworkArc<WeightType> *p;
+    if (v1 < 0 || v1 >= vexNum)
+        throw Error("v1不合法!");
+    if (v2 < 0 || v2 >= vexNum)
+        throw Error("v2不合法!");
+    if (v1 == v2)
+        throw Error("v1不能等于v2!");
+    p = vexTable[v1].firstarc;           // 从 v1 的第一条边开始
+    while (p != NULL && p->adjVex != v2) // 直到找到 v2
+        p = p->nextarc;
+    if (p == NULL || p->nextarc == NULL) // 这样后面的才是 v2 后面的第一个邻接点
+        return -1;
+    else
+        return p->nextarc->adjVex;
+}
