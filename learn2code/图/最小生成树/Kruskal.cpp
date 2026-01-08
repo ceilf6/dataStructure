@@ -1,5 +1,7 @@
 #include "Kruskal.h"
-#include "邻接表.h"
+#include "邻接矩阵.h"
+
+// “加边法”
 
 // 时间复杂度：O(ElogE) 其中E是顶点个数
 // 最小堆（二叉树）找最小权边 => logE
@@ -42,7 +44,7 @@ operator>(const KruskalEdge<ElemType, WeightType> &Ed) const
 }
 
 template <class ElemType, class WeightType>
-void MiniSpanTreeKruskal(const AdjListDirNetwork<ElemType, WeightType> &g)
+void MiniSpanTreeKruskal(const AdjMatrixUndirNetwork<ElemType, WeightType> &g)
 {
     int count, VexNum = g.GetVexNum();
     KruskalEdge<ElemType, WeightType> KEdge;
