@@ -83,4 +83,72 @@ public:
     void Display();
 };
 
+// Network带权，Graph无权
+template <class ElemType>
+struct AdjListGraphArc
+{
+    int adjvex;                      // 指向的顶点下标
+    AdjListGraphArc<ElemType> *next; // 下一条边
+
+    AdjListGraphArc(int v,
+                    AdjListGraphArc<ElemType> *n = NULL)
+        : adjvex(v), next(n) {}
+};
+template <class ElemType>
+struct AdjListGraphVex
+{
+    ElemType data;                    // 顶点信息
+    AdjListGraphArc<ElemType> *first; // 第一条边
+
+    AdjListGraphVex() : first(NULL) {}
+    AdjListGraphVex(ElemType d,
+                    AdjListGraphArc<ElemType> *f = NULL)
+        : data(d), first(f) {}
+};
+template <class ElemType>
+class AdjListDirGraph
+{
+protected:
+    int vexNum, vexMaxNum, arcNum;
+    AdjListGraphVex<ElemType> *vexTable;
+    mutable Status *tag;
+
+public:
+    // 构造 / 析构
+    AdjListDirGraph(ElemType es[], int vertexNum,
+                    int vertexMaxNum = DEFAULT_SIZE);
+    AdjListDirGraph(int vertexMaxNum = DEFAULT_SIZE);
+    ~AdjListDirGraph();
+
+    void Clear();
+    bool IsEmpty() const;
+
+    // 顶点相关
+    int GetOrder(ElemType &d) const;
+    Status GetElem(int v, ElemType &e) const;
+    Status SetElem(int v, const ElemType &d);
+    int GetVexNum() const;
+    int GetArcNum() const;
+
+    // 邻接点
+    int FirstAdjVex(int v) const;
+    int NextAdjVex(int v1, int v2) const;
+
+    // 修改操作
+    void InsertVex(const ElemType &d);
+    void InsertArc(int v1, int v2);
+    void DeleteVex(const ElemType &d);
+    void DeleteArc(int v1, int v2);
+
+    // 遍历辅助
+    Status GetTag(int v) const;
+    void SetTag(int v, Status val) const;
+
+    // 拷贝控制
+    AdjListDirGraph(const AdjListDirGraph<ElemType> &copy);
+    AdjListDirGraph<ElemType> &operator=(const AdjListDirGraph<ElemType> &copy);
+
+    void Display() const;
+};
+
 #endif
