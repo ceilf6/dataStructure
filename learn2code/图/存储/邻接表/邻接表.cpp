@@ -15,3 +15,21 @@ AdjListNetWorkVex<ElemType, WeightType>::AdjListNetWorkVex(ElemType val,
     data = val;
     firstarc = adj;
 }
+
+// 边、弧节点的无参数构造函数
+template <class WeightType>
+AdjListNetworkArc<WeightType>::AdjListNetworkArc(int v, WeightType w,
+                                                 AdjListNetworkArc<WeightType> *next)
+{
+    adjVex = -1;
+}
+
+// 边有参数构造函数
+template <class WeightType>
+AdjListNetworkArc<WeightType>::AdjListNetworkArc(int v, WeightType w,
+                                                 AdjListNetworkArc<WeightType> *next)
+{
+    adjVex = v;
+    weight = w;
+    nextarc = next;
+}

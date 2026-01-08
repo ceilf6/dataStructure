@@ -23,14 +23,14 @@ struct AdjListNetWorkVex
 template <class WeightType>
 struct AdjListNetworkArc
 {
-    int adjvex;                          // 顶点数组中的下标，标识这条边是连向哪个顶点
-    WeightType weight;                   // 边权值
-    AdjListNetworkArc<WeightType> *next; // 指向同一顶点的下一条边
+    int adjvex;                             // 顶点数组中的下标，标识这条边是连向哪个顶点
+    WeightType weight;                      // 边权值
+    AdjListNetworkArc<WeightType> *nextarc; // 指向同一顶点的下一条边
 
     AdjListNetworkArc(int v,
                       WeightType w,
                       AdjListNetworkArc *n = NULL)
-        : adjvex(v), weight(w), next(n) {}
+        : adjvex(v), weight(w), nextarc(n) {}
 };
 
 /*
