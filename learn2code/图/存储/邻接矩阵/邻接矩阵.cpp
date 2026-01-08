@@ -54,3 +54,20 @@ int AdjMatrixUndirGraph<ElemType>::FirstAdjVex(int v) const
             return u;
     return -1;
 }
+
+// 求目标 v1 从 v2 开始（不包括v2）下一个邻接点序号
+template <class ElemType>
+int AdjMatrixUndirGraph<ElemType>::NextAdjVex(int v1,
+                                              int v2) const
+{
+    if (v1 < 0 || v1 >= vexNum)
+        throw Error("v1不合法!");
+    if (v2 < 0 || v2 >= vexNum)
+        throw Error("v2不合法!");
+    if (v1 == v2)
+        throw Error("v1不能等于v2!");
+    for (int u = v2 + 1; u < vexNum; u++)
+        if (arcs[v1][u] != 0)
+            return u;
+    return -1;
+}
