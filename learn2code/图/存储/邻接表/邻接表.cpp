@@ -33,3 +33,19 @@ AdjListNetworkArc<WeightType>::AdjListNetworkArc(int v, WeightType w,
     weight = w;
     nextarc = next;
 }
+
+// 有向图邻接表构造函数
+template <class ElemType, class WeightType>
+AdjListDirNetwork<ElemType, WeightType>::AdjListDirNetwork(int vertexMaxNum,
+                                                           WeightType infinit)
+{
+    if (vertexMaxNum < 0)
+        throw Error("允许的顶点最大数目不能为负!");
+    vexNum = 0;
+    vexMaxNum = vertexMaxNum;
+    arcNum = 0;
+    infinity = infinit;
+    tag = new Status[vexMaxNum];
+    vexTable = new AdjListNetWorkVex<ElemType,
+                                     WeightType>[vexMaxNum];
+}
