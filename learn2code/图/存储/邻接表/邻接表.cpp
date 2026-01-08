@@ -139,3 +139,32 @@ void AdjListDirNetwork<ElemType, WeightType>::
         new AdjListNetworkArc<WeightType>(v2, w, p);
     arcNum++;
 }
+
+// 删除弧：链表删除
+template <class ElemType, class WeightType>
+void AdjListDirNetwork<ElemType, WeightType>::
+    DeleteArc(int v1, int v2)
+{
+    if (v1 < 0 || v1 >= vexNum)
+        throw Error("v1不合法!");
+    if (v2 < 0 || v2 >= vexNum)
+        throw Error("v2不合法!");
+    if (v1 == v2)
+        throw Error("v1不能等于v2!");
+    AdjListNetworkArc<WeightType> *p, *q;
+    p = vexTable[v1].firstarc;
+    while (p != NULL && p->adjVex != v2)
+    {
+        q = p;
+        p = p->nextarc;
+    }
+    if (p != NULL)
+    {
+        if (vexTable[v1].firstarc == p)
+            vexTable[v1].firstarc = p->nextarc;
+        else
+            q->nextarc = p->nextarc;
+        delete p;
+        arcNum--;
+    }
+}
