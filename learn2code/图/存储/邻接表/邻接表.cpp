@@ -73,3 +73,15 @@ AdjListDirNetwork<ElemType, WeightType>::AdjListDirNetwork(ElemType es[],
         vexTable[v].firstarc = NULL;
     }
 }
+
+// 求目标v的第一个邻接点序号：直接取顶点指向的adjVex
+template <class ElemType, class WeightType>
+int AdjListDirNetwork<ElemType, WeightType>::FirstAdjVex(int v) const
+{
+    if (v < 0 || v >= vexNum)
+        throw Error("v不合法!"); // 抛出异常
+    if (vexTable[v].firstarc == NULL)
+        return -1; // 不存在邻接点
+    else
+        return vexTable[v].firstarc->adjVex;
+}
