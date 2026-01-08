@@ -1,0 +1,1 @@
+\sum_{i=\sum_{j=1}^{\sum_{k=1}^{2}\left({k}\right)}\left({j\cdot j}\right)}^{100}\left({\lfloor{\frac{i}{3}}\rfloor}\right)
