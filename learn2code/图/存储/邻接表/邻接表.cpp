@@ -49,3 +49,27 @@ AdjListDirNetwork<ElemType, WeightType>::AdjListDirNetwork(int vertexMaxNum,
     vexTable = new AdjListNetWorkVex<ElemType,
                                      WeightType>[vexMaxNum];
 }
+
+// 带顶点信息的构造函数
+template <class ElemType, class WeightType>
+AdjListDirNetwork<ElemType, WeightType>::AdjListDirNetwork(ElemType es[],
+                                                           int vertexNum, int vertexMaxNum, WeightType infinit)
+{
+    if (vertexMaxNum < 0)
+        throw Error("允许的顶点最大数目不能为负!");
+    if (vertexMaxNum < vertexNum)
+        throw Error("顶点数目不能大于允许的顶点最大数目!");
+    vexNum = vertexNum;
+    vexMaxNum = vertexMaxNum;
+    arcNum = 0;
+    infinity = infinit;
+    tag = new Status[vexMaxNum];
+    vexTable = new AdjListNetWorkVex<ElemType,
+                                     WeightType>[vexMaxNum];
+    for (int v = 0; v < vexNum; v++)
+    {
+        tag[v] = UNVISITED;
+        vexTable[v].data = es[v];
+        vexTable[v].firstarc = NULL;
+    }
+}
