@@ -1,4 +1,7 @@
 #include "Kruskal.h"
+#include "邻接表.h"
+
+// 用最小堆实现的克鲁斯卡尔
 
 template <class ElemType, class WeightType>
 KruskalEdge<ElemType, WeightType>::
@@ -11,7 +14,7 @@ KruskalEdge<ElemType, WeightType>::
 
 // 比较符重载实现Cmp
 template <class ElemType, class WeightType>
-bool KruskalEdge<ElemType, WeightType>::operator<=(const KruskalEdge<ElemType, WeightType> &Ed)
+bool KruskalEdge<ElemType, WeightType>::operator<=(const KruskalEdge<ElemType, WeightType> &Ed) const
 {
     return (weight <= Ed.weight);
 }
@@ -30,13 +33,14 @@ KruskalEdge<ElemType, WeightType> &KruskalEdge<ElemType, WeightType>::operator=(
 
 template <class ElemType, class WeightType>
 bool KruskalEdge<ElemType, WeightType>::
-operator<=(const KruskalEdge<ElemType, WeightType> &Ed)
+operator>(const KruskalEdge<ElemType, WeightType> &Ed) const
+// PPT中写错了不应该是 <= ，同时最好加个 const
 {
     return (weight > Ed.weight);
 }
 
 template <class ElemType, class WeightType>
-void MiniSpanTreeKruskal(const AdjMatrixUndirNetwork<ElemType, WeightType> &g)
+void MiniSpanTreeKruskal(const AdjListDirNetwork<ElemType, WeightType> &g)
 {
     int count, VexNum = g.GetVexNum();
     KruskalEdge<ElemType, WeightType> KEdge;
@@ -47,7 +51,8 @@ void MiniSpanTreeKruskal(const AdjMatrixUndirNetwork<ElemType, WeightType> &g)
     for (int i = 0; i < VexNum; i++)
         g.GetElem(i, kVex[i]);
     UFSets<ElemType> f(kVex, VexNum);
-    for (int v = 0; v < g.GetVexNum(); v++) // 将所有边插入堆
+    // 用最小堆收集所有边
+    for (int v = 0; v < g.GetVexNum(); v++)
         for (int u = g.FirstAdjVex(v); u >= 0; u = g.NextAdjVex(v, u))
             if (v < u)
             {
@@ -58,13 +63,14 @@ void MiniSpanTreeKruskal(const AdjMatrixUndirNetwork<ElemType, WeightType> &g)
                 KEdge.weight = g.GetWeight(v, u);
                 ha.Insert(KEdge);
             }
+    // ！反复从 堆 取最小值 + 并查集 判环
     count = 0;
     while (count < VexNum - 1)
     {
         ha.DeleteTop(KEdge);
         v1 = KEdge.vertex1;
         v2 = KEdge.vertex2;
-        if (f.Differ(v1, v2))
+        if (f.Differ(v1, v2)) // 判断是否在不同集合，如果是不同集合就不会成环
         {
             cout << "边:( " << v1 << ", " << v2
                  << " ) 权:" << KEdge.weight << endl;

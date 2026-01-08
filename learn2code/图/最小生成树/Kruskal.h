@@ -9,7 +9,7 @@ public:
     KruskalEdge<ElemType, WeightType> &operator=(
         const KruskalEdge<ElemType, WeightType> &Ed);
     bool operator<=(const KruskalEdge<ElemType,
-                                      WeightType> &Ed);
+                                      WeightType> &Ed) const;
     bool operator>(const KruskalEdge<ElemType,
-                                     WeightType> &Ed);
+                                     WeightType> &Ed) const;
 };
