@@ -140,7 +140,7 @@ void AdjListDirNetwork<ElemType, WeightType>::
     arcNum++;
 }
 
-// 删除弧：链表删除
+// 删除弧：删除链表节点
 template <class ElemType, class WeightType>
 void AdjListDirNetwork<ElemType, WeightType>::
     DeleteArc(int v1, int v2)
@@ -167,4 +167,55 @@ void AdjListDirNetwork<ElemType, WeightType>::
         delete p;
         arcNum--;
     }
+}
+
+// 删除顶点
+/*
+1. 删除“别人指向 v 的边”（入边）
+2. 删除 v 自己的邻接边链表（出边）
+3. 删除顶点并用最后一个顶点补位
+4. 修正所有边结点里的 adjVex（下标修正）
+*/
+template <class ElemType, class WeightType>
+void AdjListDirNetwork<ElemType, WeightType>::
+    DeleteVex(const ElemType &d)
+{
+    int v;
+    AdjListNetworkArc<WeightType> *p, *q;
+    for (v = 0; v < vexNum; v++)
+        if (vexTable[v].data == d)
+            break;
+    if (v == vexNum)
+        throw Error("图中不存在要删除的顶点!");
+    // 1. 删除“别人指向 v 的边”（入边）
+    for (int u = 0; u < vexNum; u++)
+        if (u != v)
+            DeleteArc(u, v);
+    p = vexTable[v].firstarc;
+    // 2. 删除 v 自己的邻接边链表（出边）
+    while (p != NULL)
+    {
+        vexTable[v].firstarc = p->nextarc;
+        delete p;
+        p = vexTable[v].firstarc;
+        arcNum--;
+    }
+    // 3. 删除顶点并用最后一个顶点补位
+    vexNum--;
+    vexTable[v].data = vexTable[vexNum].data;
+    vexTable[v].firstarc = vexTable[vexNum].firstarc;
+    vexTable[vexNum].firstarc = NULL;
+    tag[v] = tag[vexNum];
+    // 4. 修正所有边结点里的 adjVex（下标修正）
+    for (int u = 0; u < vexNum; u++)
+        if (u != v)
+        {
+            p = vexTable[u].firstarc;
+            while (p != NULL)
+            {
+                if (p->adjVex == vexNum)
+                    p->adjVex = v;
+                p = p->nextarc;
+            }
+        }
 }
