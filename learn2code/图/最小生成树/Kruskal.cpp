@@ -1,7 +1,9 @@
 #include "Kruskal.h"
 #include "邻接表.h"
 
-// 用最小堆实现的克鲁斯卡尔
+// 时间复杂度：O(ElogE) 其中E是顶点个数
+// 最小堆（二叉树）找最小权边 => logE
+// 最多需要检查 E 条边，所以整体就是 ElogE
 
 template <class ElemType, class WeightType>
 KruskalEdge<ElemType, WeightType>::
