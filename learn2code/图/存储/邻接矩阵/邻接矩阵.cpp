@@ -106,3 +106,34 @@ void AdjMatrixUndirGraph<ElemType>::InsertArc(int v1,
         arcs[v2][v1] = 1;
     }
 }
+
+// 删除点：
+template <class ElemType>
+void AdjMatrixUndirGraph<ElemType>::DeleteVex(const ElemType &d)
+{
+    int v;
+    for (v = 0; v < vexNum; v++)
+        if (vertexes[v] == d) // 遍历拿目标索引
+            break;
+    if (v == vexNum)
+        throw Error("图中不存在要删除的顶点!");
+    for (int u = 0; u < vexNum; u++)
+        if (arcs[v][u] == 1)
+        {
+            arcNum--; // 遍历边，更新边数
+            // 同时处理两处
+            arcs[v][u] = 0;
+            arcs[u][v] = 0;
+        }
+    vexNum--;       // 更新顶点数
+    if (v < vexNum) // 如果删的不是最后一个，那么中间就有断沟
+    // 将最后一个顶点补到被删位置
+    {
+        vertexes[v] = vertexes[vexNum];
+        tag[v] = tag[vexNum];
+        for (int u = 0; u <= vexNum; u++)
+            arcs[v][u] = arcs[vexNum][u];
+        for (int u = 0; u <= vexNum; u++)
+            arcs[u][v] = arcs[u][vexNum];
+    }
+}
