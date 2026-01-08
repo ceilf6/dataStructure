@@ -71,3 +71,19 @@ int AdjMatrixUndirGraph<ElemType>::NextAdjVex(int v1,
             return u;
     return -1;
 }
+
+// 插入顶点
+template <class ElemType>
+void AdjMatrixUndirGraph<ElemType>::InsertVex(const ElemType &d)
+{
+    if (vexNum == vexMaxNum)
+        throw Error("图的顶点数不能超过允许的最大数!");
+    vertexes[vexNum] = d;
+    tag[vexNum] = UNVISITED;          // 打标记新点在图的遍历中没有被访问过
+    for (int v = 0; v <= vexNum; v++) // 初始化无边
+    {
+        arcs[vexNum][v] = 0;
+        arcs[v][vexNum] = 0;
+    }
+    vexNum++;
+}
