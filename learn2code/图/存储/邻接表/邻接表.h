@@ -41,5 +41,46 @@ vertexes[1] --> arc1_1 -> arc1_2 -> NULL
 vertexes[2] --> NULL
 ...
 */
+// 有向图邻接表类
+template <class ElemType, class WeightType>
+class AdjListDirNetwork
+{
+protected:
+    int vexNum, vexMaxNum, arcNum;
+    AdjListNetWorkVex<ElemType, WeightType> *vexTable;
+    mutable Status *tag;
+    WeightType infinity;
+
+public:
+    AdjListDirNetwork(ElemType es[], int vertexNum,
+                      int vertexMaxNum = DEFAULT_SIZE,
+                      WeightType infinit = (WeightType)DEFAULT_INFINITY);
+    AdjListDirNetwork(int vertexMaxNum = DEFAULT_SIZE,
+                      WeightType infinit = (WeightType)DEFAULT_INFINITY);
+    ~AdjListDirNetwork();
+    void Clear();
+    bool IsEmpty();
+    int GetOrder(ElemType &d) const;
+    Status GetElem(int v, ElemType &e) const;
+    Status SetElem(int v, const ElemType &d);
+    WeightType GetInfinity() const;
+    int GetVexNum() const;
+    int GetArcNum() const;
+    int FirstAdjVex(int v) const;
+    int NextAdjVex(int v1, int v2) const;
+    void InsertVex(const ElemType &d);
+    void InsertArc(int v1, int v2, WeightType w);
+    void DeleteVex(const ElemType &d);
+    void DeleteArc(int v1, int v2);
+    WeightType GetWeight(int v1, int v2) const;
+    void SetWeight(int v1, int v2, WeightType w);
+    Status GetTag(int v) const;
+    void SetTag(int v, Status tag) const;
+    AdjListDirNetwork(const AdjListDirNetwork<ElemType,
+                                              WeightType> &copy);
+    AdjListDirNetwork<ElemType, WeightType> &operator=(const AdjListDirNetwork<ElemType, WeightType>
+                                                           &copy);
+    void Display();
+};
 
 #endif
