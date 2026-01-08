@@ -1,6 +1,12 @@
 #include "Status.h"
 #include "邻接表.h"
 
+/*
+1. 拓扑排序 + 计算 ve
+2. 逆拓扑序 + 计算 vl
+3. 逐条边判断 ee == el → 输出关键活动
+*/
+
 template <class ElemType, class WeightType>
 Status CriticalPath(const AdjListDirNetwork<ElemType, WeightType> &g)
 {
@@ -13,15 +19,18 @@ Status CriticalPath(const AdjListDirNetwork<ElemType, WeightType> &g)
     ElemType e1, e2;
     for (v = 0; v < g.GetVexNum(); v++)
         ve[v] = 0;
+    // Kahn: 统计入度
     StatIndegree(g, indegree);
     for (v = 0; v < g.GetVexNum(); v++)
         if (indegree[v] == 0)
             q.EnQueue(v);
+    // 拓扑排序主循环
     while (!q.IsEmpty())
     {
         q.DelQueue(u);
-        s.Push(u);
+        s.Push(u); // 同步压栈，为后面算 vl 准备逆拓扑序
         count++;
+        // 在拓扑序中计算 ve
         for (v = g.FirstAdjVex(u); v != -1; v = g.NextAdjVex(u, v))
         {
             if (--indegree[v] == 0)
@@ -31,15 +40,18 @@ Status CriticalPath(const AdjListDirNetwork<ElemType, WeightType> &g)
         }
     }
     delete[] indegree;
+    // 判环：不是DAG就没有关键路径
     if (count < g.GetVexNum())
     {
         delete[] ve;
         delete[] vl;
-        return FAIL; // 网g有回路
+        return FAIL;
     }
+    // 2. 逆拓
     s.Top(u); // 取出栈顶u,为汇点
     for (v = 0; v < g.GetVexNum(); v++)
         vl[v] = ve[u];
+    // 逆拓排序计算 vl
     while (!s.IsEmpty())
     {
         s.Pop(u); // 计算vl,事件最晚
@@ -53,7 +65,7 @@ Status CriticalPath(const AdjListDirNetwork<ElemType, WeightType> &g)
         {
             ee = ve[u];
             el = vl[v] - g.GetWeight(u, v);
-            if (ee == el)
+            if (ee == el) // 3. 判断：如果相同就是关键路径
             {
                 g.GetElem(u, e1);
                 g.GetElem(v, e2);
