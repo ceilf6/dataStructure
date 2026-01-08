@@ -22,3 +22,5 @@
 !*.jpg
 !*.png
 !*.pdf
+!*.pptx
+!*.ppt
