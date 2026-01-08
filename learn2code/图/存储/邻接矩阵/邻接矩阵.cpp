@@ -137,3 +137,21 @@ void AdjMatrixUndirGraph<ElemType>::DeleteVex(const ElemType &d)
             arcs[u][v] = arcs[u][vexNum];
     }
 }
+
+// 删除边
+template <class ElemType>
+void AdjMatrixUndirGraph<ElemType>::DeleteArc(int v1, int v2)
+{
+    if (v1 < 0 || v1 >= vexNum)
+        throw Error("v1不合法!");
+    if (v2 < 0 || v2 >= vexNum)
+        throw Error("v2不合法!");
+    if (v1 == v2)
+        throw Error("v1不能等于v2!");
+    if (arcs[v1][v2] != 0)
+    {
+        arcNum--;
+        arcs[v1][v2] = 0;
+        arcs[v2][v1] = 0;
+    }
+}
