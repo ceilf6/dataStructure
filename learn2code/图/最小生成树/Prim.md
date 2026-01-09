@@ -3,6 +3,7 @@
 
 因为是不断引入新顶点，所以不会形成环
 
+3. 选择 lowweight 最小的顶点
 
 4. 松弛：读取邻接矩阵中当前(V-U)未加入点和新加入U的点的距离进行比较
     g.GetWeight(v, u) < closearc[u].lowweight
