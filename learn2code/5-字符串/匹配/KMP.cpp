@@ -18,11 +18,11 @@ p[i]:  0 0 1 2 3 // p[0]=0是因为需要真：不能等于字符串本身
 */
 // 前缀函数中 p[x] = L目标 的就是找到了
 
-#include "../重载运算符-简化字符串操作.h"
+#include "重载运算符-简化字符串操作.h"
 
 // 计算失配数组（前缀函数）
 // f[j] 表示 pat[0..j-1] 的最长相等真前后缀长度
-void GetFailure(const String &pat, int *f)
+void GetFailure(const std::String &pat, int *f)
 {
     int m = pat.GetLength();
     f[0] = -1; // 约定：第一个位置失配时，主串指针后移
