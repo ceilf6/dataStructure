@@ -36,4 +36,7 @@ protected:
     int maxSize; // 队列容量
     ElemType *elems; // 元素存储空间
 
+- 用 front 和 length 表示队头位置和队列长度则入队操作为
+    elem[front+length++] = e
+    [] 语法糖会先取 front 位置然后再加 length 的size
 */
