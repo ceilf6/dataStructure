@@ -1,5 +1,7 @@
 #include "重载运算符-简化字符串操作.h"
 
+// 时间复杂度(主串长n,模式串长m): O((n-m+1)*m)
+
 int BF_find(const String &ob, const String &pat, const int p = 0)
 {
     int i = p, j = 0;
