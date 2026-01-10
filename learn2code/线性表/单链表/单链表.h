@@ -25,6 +25,10 @@ class LinkList
 {
 protected:
     Node<ElemType> *head;
+    /*
+    Q: 在单链表中设置头节点的作用？
+    A: 使插入、删除等操作统一，如果没有头节点，在插入、删除操作时对空表和非空表要进行区分，以便进行不同的处理
+    */
     int length;
 
 public:
