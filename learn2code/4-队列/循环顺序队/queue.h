@@ -1,5 +1,12 @@
 #include "Status.h"
 
+/*
+循环队列的引入是为了解决非循环顺序队列的假溢出问题
+非循环队列判断溢出的条件是
+    rear == maxSize -1
+但是 实际上可能前面已经出队了一些元素，这部分空间没有利用起来
+*/
+
 template <class ElemType>
 class SeqQueue
 {
