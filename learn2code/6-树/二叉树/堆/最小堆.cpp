@@ -85,8 +85,8 @@ void MinHeap<ElemType>::FilterUp(int End)
             j = i;           // 上提
             i = (j - 1) / 2; // 上提的父元素
         }
-        heapArr[j] = temp;
     }
+    heapArr[j] = temp; // 在最后找到了合适的插入位置后，将 temp 放到 j 的位置。PPT中将本句放在了 while 里面这是错的
 }
 
 template <class ElemType>
