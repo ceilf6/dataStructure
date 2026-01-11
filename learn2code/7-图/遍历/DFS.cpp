@@ -2,6 +2,11 @@
 
 // 邻接矩阵 O(n**2)
 
+/*
+tag 的作用就相当于一个 vis 集合
+    所以在递归部分需要 g.GetTag(w) == UNVISITED 判断
+*/
+
 // 单源DFS
 template <class ElemType>
 void DFS(const AdjMatrixUndirGraph<ElemType> &g,
