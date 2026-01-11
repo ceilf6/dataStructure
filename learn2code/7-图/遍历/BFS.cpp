@@ -8,19 +8,20 @@ void BFS(const AdjMatrixUndirGraph<ElemType> &g,
     int u, w;
     ElemType e;
     g.SetTag(v, VISITED);
-    g.GetElem(v, e);
+    g.GetElem(v, e); // 取入口到 e
     Visit(e);
-    q.EnQueue(v);
+    q.EnQueue(v); // 队列存的是下标
     while (!q.IsEmpty())
     {
-        q.DelQueue(u);
+        q.DelQueue(u); // 取队头到 u
         for (w = g.FirstAdjVex(u); w != -1; w = g.NextAdjVex(u, w))
+            // 遍历邻接节点
             if (g.GetTag(w) == UNVISITED)
             {
                 g.SetTag(w, VISITED);
                 g.GetElem(w, e);
                 Visit(e);
-                q.EnQueue(w);
+                q.EnQueue(w); // 入队：当前层访问的就是下一层的头
             }
     }
 }
