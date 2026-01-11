@@ -22,6 +22,7 @@ p[i]:  0 0 1 2 3 // p[0]=0是因为需要真：不能等于字符串本身
 
 // 计算失配数组（前缀函数）
 // f[j] 表示 pat[0..j-1] 的最长相等真前后缀长度
+// 书中 f[0] = -1
 void GetFailure(const std::String &pat, int *f)
 {
     int m = pat.GetLength();
