@@ -1,6 +1,8 @@
 // 线索化之后就不需要依赖栈递归
 // 其中中序线索二叉树遍历最为简单，后序线索二叉树由于其后继结点与父结点及左右子树关系密切，通常需要借助父指针或额外结构才能完成遍历。
 
+#include "ThreadNode.h"
+
 // 中序
 ThreadNode *FirstNode(ThreadNode *p)
 {
