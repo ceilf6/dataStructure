@@ -121,7 +121,7 @@ void AdjMatrixUndirGraph<ElemType>::DeleteVex(const ElemType &d)
         if (arcs[v][u] == 1)
         {
             arcNum--; // 更新边数
-            // 同时处理两处
+            // 同时处理无向邻接矩阵的对称两处
             arcs[v][u] = 0;
             arcs[u][v] = 0;
         }
