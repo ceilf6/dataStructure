@@ -26,8 +26,9 @@ Status TopSort(const AdjListDirGraph<ElemType> &g)
     StatIndegree(g, indegree);
     for (v = 0; v < g.GetVexNum(); v++)
         if (indegree[v] == 0)
-        { // 入度为0的顶点入栈
-            indegree[v] = top;
+        {                      // 入度为0的顶点入栈
+            indegree[v] = top; // 入栈后该点存的就不是入度（0）了，而是用于实现链式栈
+                               // 即串联起来栈中该点指向的上一个节点
             top = v;
         }
     // 栈非空就不断弹
