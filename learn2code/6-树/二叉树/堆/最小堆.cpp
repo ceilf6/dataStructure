@@ -73,8 +73,8 @@ template <class ElemType>
 void MinHeap<ElemType>::FilterUp(int End)
 {
     int j = End, i;
-    ElemType temp = heapArr[j];
-    i = (j - 1) / 2; // 父元素
+    ElemType temp = heapArr[j]; // 通过 temp 保存新插入的节点，下面就是在找插入 tmp 的合适位置
+    i = (j - 1) / 2;            // 父元素
     while (j > 0)
     {
         if (heapArr[i] <= temp)
@@ -82,12 +82,13 @@ void MinHeap<ElemType>::FilterUp(int End)
         else
         {
             heapArr[j] = heapArr[i];
-            j = i;
-            i = (j - 1) / 2;
+            j = i;           // 上提
+            i = (j - 1) / 2; // 上提的父元素
         }
         heapArr[j] = temp;
     }
 }
+
 template <class ElemType>
 Status MinHeap<ElemType>::Insert(const ElemType &e)
 {
