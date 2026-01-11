@@ -129,7 +129,7 @@ void AdjMatrixUndirGraph<ElemType>::DeleteVex(const ElemType &d)
     if (v < vexNum) // 如果删的不是最后一个，那么中间就有断沟
     // 将最后一个顶点补到被删位置
     {
-        vertexes[v] = vertexes[vexNum];
+        vertexes[v] = vertexes[vexNum]; // vexNum作为下标刚好指向刚被抛弃的点
         tag[v] = tag[vexNum];
         for (int u = 0; u <= vexNum; u++)
             arcs[v][u] = arcs[vexNum][u];
