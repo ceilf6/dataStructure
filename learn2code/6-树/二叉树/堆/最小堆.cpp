@@ -56,7 +56,7 @@ MinHeap<ElemType>::MinHeap(ElemType a[], int maxSize, int n)
     for (int i = 0; i < n; i++)
         heapArr[i] = a[i];
     CurrentSize = n;
-    int i = (CurrentSize - 2) / 2;
+    int i = CurrentSize / 2 - 1; // 最后一个叶子节点位置
     while (i >= 0)
     {
         FilterDown(i);
