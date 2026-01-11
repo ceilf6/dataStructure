@@ -18,6 +18,7 @@ void DFS(const AdjMatrixUndirGraph<ElemType> &g,
     Visit(e);
     for (int w = g.FirstAdjVex(v); w != -1;
          w = g.NextAdjVex(v, w))
+        // 遍历邻接节点
         if (g.GetTag(w) == UNVISITED)
             DFS(g, w, Visit);
 }
@@ -27,6 +28,7 @@ template <class ElemType>
 void DFSTraverse(const AdjMatrixUndirGraph<ElemType> &g,
                  void (*Visit)(const ElemType &))
 {
+    // 遍历子图
     int v;
     for (v = 0; v < g.GetVexNum(); v++)
         g.SetTag(v, UNVISITED);
