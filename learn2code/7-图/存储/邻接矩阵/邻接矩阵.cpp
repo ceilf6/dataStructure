@@ -120,7 +120,7 @@ void AdjMatrixUndirGraph<ElemType>::DeleteVex(const ElemType &d)
     for (int u = 0; u < vexNum; u++)
         if (arcs[v][u] == 1)
         {
-            arcNum--; // 遍历边，更新边数
+            arcNum--; // 更新边数
             // 同时处理两处
             arcs[v][u] = 0;
             arcs[u][v] = 0;
