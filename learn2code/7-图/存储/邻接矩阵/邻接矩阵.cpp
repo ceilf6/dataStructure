@@ -88,25 +88,6 @@ void AdjMatrixUndirGraph<ElemType>::InsertVex(const ElemType &d)
     vexNum++;
 }
 
-// 插入边：在邻接矩阵对应位置（无向图是对称的两处）打标记
-template <class ElemType>
-void AdjMatrixUndirGraph<ElemType>::InsertArc(int v1,
-                                              int v2)
-{
-    if (v1 < 0 || v1 >= vexNum)
-        throw Error("v1不合法!");
-    if (v2 < 0 || v2 >= vexNum)
-        throw Error("v2不合法!");
-    if (v1 == v2)
-        throw Error("v1不能等于v2!");
-    if (arcs[v1][v2] == 0)
-    {
-        arcNum++;
-        arcs[v1][v2] = 1;
-        arcs[v2][v1] = 1;
-    }
-}
-
 // 删除点：
 template <class ElemType>
 void AdjMatrixUndirGraph<ElemType>::DeleteVex(const ElemType &d)
@@ -135,6 +116,25 @@ void AdjMatrixUndirGraph<ElemType>::DeleteVex(const ElemType &d)
             arcs[v][u] = arcs[vexNum][u];
         for (int u = 0; u <= vexNum; u++)
             arcs[u][v] = arcs[u][vexNum];
+    }
+}
+
+// 插入边：在邻接矩阵对应位置（无向图是对称的两处）打标记
+template <class ElemType>
+void AdjMatrixUndirGraph<ElemType>::InsertArc(int v1,
+                                              int v2)
+{
+    if (v1 < 0 || v1 >= vexNum)
+        throw Error("v1不合法!");
+    if (v2 < 0 || v2 >= vexNum)
+        throw Error("v2不合法!");
+    if (v1 == v2)
+        throw Error("v1不能等于v2!");
+    if (arcs[v1][v2] == 0)
+    {
+        arcNum++;
+        arcs[v1][v2] = 1;
+        arcs[v2][v1] = 1;
     }
 }
 
