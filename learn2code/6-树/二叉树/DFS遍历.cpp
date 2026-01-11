@@ -7,6 +7,7 @@ void BinaryTree<ElemType>::
 {
     if (r != NULL)
     {
+        // 左根右
         InOrder(r->leftChild, Visit);
         (*Visit)(r->data);
         InOrder(r->rightChild, Visit);
@@ -20,6 +21,7 @@ void BinaryTree<ElemType>::
 {
     if (r != NULL)
     {
+        // 根左右
         (*Visit)(r->data);
         PreOrder(r->leftChild, Visit);
         PreOrder(r->rightChild, Visit);
@@ -33,6 +35,7 @@ void BinaryTree<ElemType>::
 {
     if (r != NULL)
     {
+        // 左右根
         PostOrder(r->leftChild, Visit);
         PostOrder(r->rightChild, Visit);
         (*Visit)(r->data);
