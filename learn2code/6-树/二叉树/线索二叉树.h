@@ -15,7 +15,7 @@ struct ThreadBinTreeNode
     ElemType data;
     ThreadBinTreeNode<ElemType> *leftChild;
     ThreadBinTreeNode<ElemType> *rightChild;
-    int leftTag, rightTag; // 原先是否为空，现在是否为向前驱或后继的指针
+    int leftTag, rightTag; // 原先是否为空，现在是否为向前驱或后继的指针: 0的时候是孩子指针，1的时候就是前驱/后继
     ThreadBinTreeNode();
     ThreadBinTreeNode(const ElemType &d,
                       ThreadBinTreeNode<ElemType> *lChild = NULL,
