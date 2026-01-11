@@ -2,6 +2,7 @@
 #include "邻接矩阵.h"
 
 // “加点法”
+// Prim 有双重循环，复杂度 O(n**2)
 
 template <class ElemType, class WeightType>
 void MiniSpanTreePrim(const AdjMatrixUndirNetwork<ElemType,

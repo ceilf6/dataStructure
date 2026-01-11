@@ -8,3 +8,6 @@
 4. 松弛：读取邻接矩阵中当前(V-U)未加入点和新加入U的点的距离进行比较
     g.GetWeight(v, u) < closearc[u].lowweight
     如果 true 的话那么就更新 closearc[u].lowweight 同时更新邻接点 closearc[u].nearvertext = v
+
+
+Prim 有双重循环，复杂度 O(n**2)
