@@ -91,7 +91,7 @@ int BinaryTree<ElemType>::NodeCount(
     if (r == NULL)
         return 0;
     else
-        return NodeCount(r->leftChild) + NodeCount(r->rightChild) + 1;
+        return NodeCount(r->leftChild) + NodeCount(r->rightChild) + 1; // 最后的1是计算的当前节点
 }
 
 // 递归拿高：左右子树最大值+1
