@@ -57,8 +57,8 @@ template <class ElemType>
 ThreadBinTreeNode<ElemType> *InThreadBinTree<ElemType>::GetNext(ThreadBinTreeNode<ElemType> *p) const
 {
     if (p->rightTag == 1)
-        p = p->rightChild;
-    else
+        p = p->rightChild; // 如果是线索的话就直接后继
+    else                   // 不是线索，即如果是右子树的话
     {
         p = p->rightChild;
         /*
