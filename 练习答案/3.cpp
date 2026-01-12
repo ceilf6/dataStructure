@@ -18,6 +18,7 @@ Status SeqList<ElemType>::DeleteMinElem(ElemType &e)
     }
 }
 
+// 1.2
 status seq::deleteV(const ElemType v)
 {
     int k = 0; // k 表示新数组中应放置的位置
@@ -33,3 +34,4 @@ status seq::deleteV(const ElemType v)
     length = k; // 更新顺序表长度
     return OK;
 }
+// 参考答案是直接调用的 GetElem 和 DeleteElem
