@@ -70,7 +70,7 @@ int LinkList<ElemType>::LocateElem(const ElemType &e) const
     return (p != NULL) ? count : 0;
 }
 
-// 7. 取第几个元素值
+// 7. 取第 i 个元素值到 e 中
 template <class ElemType>
 LinkList<ElemType>::Status LinkList<ElemType>::GetElem(int i, ElemType &e) const
 {

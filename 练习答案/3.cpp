@@ -21,17 +21,20 @@ Status SeqList<ElemType>::DeleteMinElem(ElemType &e)
 // 1.2
 status seq::deleteV(const ElemType v)
 {
-    int k = 0; // k 表示新数组中应放置的位置
+    int k = 0;
+    ElemType temp;
 
     for (int i = 0; i < length; i++)
     {
-        if (elems[i] != v)
+        GetElem(i, temp);
+        if (temp != v)
         {
-            elems[k++] = elems[i];
+            SetElem(k, temp);
+            k++;
         }
     }
 
-    length = k; // 更新顺序表长度
+    length = k;
     return OK;
 }
 // 参考答案是直接调用的 GetElem 和 DeleteElem
