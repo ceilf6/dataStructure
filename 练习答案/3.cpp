@@ -38,3 +38,11 @@ status seq::deleteV(const ElemType v)
     return OK;
 }
 // 参考答案是直接调用的 GetElem 和 DeleteElem
+
+// 9
+/*
+int count = 1;
+p->freq++;
+其中 count 是在数组中出现的逻辑下标
+freq才是统计的出现频率
+*/
