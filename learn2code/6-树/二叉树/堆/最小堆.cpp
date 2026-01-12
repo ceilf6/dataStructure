@@ -42,7 +42,7 @@ void MinHeap<ElemType>::FilterDown(const int Start)
 }
 
 // 利用向下调整算法建堆：从最后一个非叶子节点开始往前对每个元素做向下调整（叶子节点已经是堆了）
-// 最后一个叶子节点是 n/2-1 位置
+// 最后一个非叶子节点是 n/2-1 位置
 template <class ElemType>
 MinHeap<ElemType>::MinHeap(ElemType a[], int maxSize, int n)
 {
